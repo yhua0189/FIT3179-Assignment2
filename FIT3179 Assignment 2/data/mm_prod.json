@@ -1,0 +1,15 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Stock prices of 5 Tech Companies over Time.",
+    "data": {"url": "https://raw.githubusercontent.com/yhua0189/FIT3179-Assignment2/main/FIT3179%20Assignment%202/data/weather_indicators_RCP45.csv"},
+    "mark": {
+      "type": "bar",
+      "point": true
+    },
+    "encoding": {
+      "x": {"timeUnit": "year", "field": "time"},
+      "y": {"aggregate":"mean", "field": "mm_prod", "type": "quantitative"},
+      "color": {"field": "symbol", "type": "nominal"}
+    }
+  }
+  

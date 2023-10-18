@@ -1,0 +1,48 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Area distribution and Altitude in Europe ",
+  "width": 1000,
+  "height": 800,
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/yhua0189/FIT3179-Assignment2/main/FIT3179%20Assignment%202/data/Europe.json",
+        "format": {
+          "type": "topojson",
+          "feature": "europe"
+        }
+      },
+      "projection": {
+        "type": "stereographic"
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "lightgray",
+        "stroke": "white"
+      }
+    },
+    
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/yhua0189/FIT3179-Assignment2/main/FIT3179%20Assignment%202/data/weather_indicators_RCP45.csv"
+      },
+
+      "mark": "circle",
+      "encoding": {
+        "tooltip": {
+          "field": "ZS"
+        },
+        "longitude": {
+          "field": "LON",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "LAT",
+          "type": "quantitative"
+        },
+        "size": {"value": 10},
+        "color": {"value": "steelblue"}
+      }
+    }
+  ]
+}
