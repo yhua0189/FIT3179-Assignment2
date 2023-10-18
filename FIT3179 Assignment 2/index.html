@@ -1,28 +1,230 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>caponima</title>
-  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
-  
-  <!-- CSS file -->
-  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+  <title>Meteorological and snow indicator in Europe</title>
+  <!-- Import Vega & Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+  <!-- Import vega-embed which combine the vegalite graph and html-->
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google font that make the word looks better -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
 
+  <!-- custom style -->
+  <style>
+    * {
+      font-family: 'Oxygen', sans-serif;
+      line-height: 1.5;
+    }
 
+    h1 {
+      font-weight: 900;
+
+    }
+
+    body {
+      background-color: lightgray;
+    }
+
+    .page {
+      width: 1000px;
+      background-color: white;
+      margin: auto;
+      padding: 100px;
+      padding-top: 35px;
+    }
+
+    .vis-container {
+      width: 100%;
+    }
+
+    .description h2,
+    h1 {
+      margin-top: 10px;
+    }
+
+    .description-right {
+      padding-left: 10px;
+    }
+
+    .description-left {
+      padding-right: 10px;
+    }
+
+    .pure-g {
+      margin-bottom: 25px;
+    }
+
+    .small-font {
+      font-size: 13px;
+    }
+    .flex {display: flex }
+  </style>
 </head>
+
 <body>
+
+  <div class="page">
+
+    <!-- Title and subtitle -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h1>Meteorological and snow indicator in Europe</h1>
+        <p>This data has been collected from 2005 to now, the most of the years are the prediction of the data, <i>(Prediction!)</i> , the dataset 
+          provides meteorological and snow indicators for Europe only, so that i search for the European map,characterizing operating conditions 
+          of winter ski resorts under RCP 4.5 scenario. It includes data on precipitation, snowfall, temperature, and other variables. 
+    </div>
+    <!-- end pure grid group -->
+
+    <!-- Choropleth map -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <div id="vis1" class="vis-container"></div>
+      </div>
+    </div>
+
+ 
+    <!-- end pure grid group -->
+
+    <!-- Caption/small text -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <p>The Map visualisation provides an overview of the area and placement across different countries in Europe. The map uses colour from green to red to represent the latitude of the place
+          , with the map placement and different, it's easy to tell the latitude .
+
+          <p>On the map, the majority of places are represented in green, indicating that it's about 1000km high vertically from  is the ground. While small amount of place in Europe are somehow red,
+          which indicate it could be on the mountain or highground, as higher place got lower temperature. A combination of a choropleth map and dots shown on the map, it also has a legend on 
+          the right side that explains the color-coding.</p>
+        </p>
+    <!-- end pure grid group -->
+
+    <div class="flex"><div id="vis2" class="vis-container" ></div> <div id="vis3" class="vis-container"></div> <div id="vis4" class="vis-container"></div></div>
+    <!-- More text -->
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <p><small><i>The three graphs can be compared horizontally, as i set the limit of days as the same for all of them, each one indicate low, medium and high snow depth in Europe during 
+          the year from 2005 and 2030.
+             
+            </i></small></p>
+
+        <p>
+          There are three different rates of the amount of days due to the number of days: sd_days_low, sd_days_medium, and sd_days_high. These metrics track the number of days with 
+          specific minimum snow depths (5 cm, 30 cm, and 50 cm, respectively) on the ground within various time periods, encompassing annual, Christmas, and Purimasa periods from 2005 to 2030.
+
+          The variable sd_days_low, which signifies days with a minimum of 5 cm of snow, shows the frequency of snowfall and its duration throughout the year. 
+          A higher count of such days indicate more natural snow cover, which make the ski resort more consistent with snow conditions for their operations.
+
+          What's more, sd_days_medium and sd_days_high, which represent days with minimum snow depths of 30 cm and 50 cm, respectively, offer a much more deeper
+          snow cover.
+
+          All the three graphs have a similar overall shape, but the amount of days getting lower and lower.</p>
+      </div>
+    </div>
+    <!-- end pure grid group -->
+    <!--use flex to combine things in one line-->
+    
+    
   
-<div id="choropleth_map"></div>
 
-<script type="text/javascript">
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <div id="vis5" class="vis-container"></div>
+      </div>
+      <div class="pure-u-1-2">
+        <div class="description description-right">
+          <h2>Indicator of Machine-made snow </h2>
+          <p>The mm_prod variable in the dataset provides information on the annual amount of machine-made snow produced (in kg m-2) for the period August 1st of year N-1 to July 31st 
+            of year N (using managed snow simulations). This variable is relevant to the ski industry as it helps in understanding the amount of snow that can be produced artificially. 
+            From the bar graph it shows that from years to years, the machine-made snow stay in a stable rate, which is a way extend the ski season, as resorts can begin operating earlier
+             and continue later into the spring. This not only provides more opportunities for skiers but also increase the revenue of ski resorts. It can be a crucial factor for the 
+             economic sustainability of these businesses in Europe with short and unpredictable natural snow seasons.
+             <p><small><i>Connect to the graph at last : 'temp_vs_natural_snow', it's easy to tell that the period of the natural snow normally only last about one to two month in Europe, due the amount of 
+              population and the popular of sking in European countries, it's clearly not enough only depends on the natural snow, machine-snow is an essential factor that support the ski resort and 
+              such organization during the time.
+             </small></p></i>
+            
+         
+          <p>The data can be used to optimize snow production and reduce costs, also the variable can be used to study the impact of climate change and the ski industry.
+            </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        
+          <h2>Natural snow in Europe and the temperature</h2>
+          <p>This dataset is all about understanding how much snow falls during winter in Europe and how cold it is during those times.
 
-  var spec2 = "FIT3179 Assignment 2/data/choropleth.json";
-  vegaEmbed('#choropleth', spec2).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-</script>
+            The "swe_days_natural_high" tells us how many days there's cold during the year time and the "mean_winter_tas" indicate the temperature in celsius as the code transfer Kelvin 
+            into Celsius during the time. There are lot's of days that with no natural, which connect to the machine-made snow that mention before.  
+            
+             </p>
+          <p>
+            By looking at these two things, how natural snow might be changing the temperature in Europe are shown.
+          </p>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+      <div class="pure-u-1-2">
+        <div id="vis6" class="vis-container"></div>
+      </div>
+    <!-- pure grid group -->
+    </div>
+    <!-- end pure grid group -->
 
+    <div class="pure-g">
+      <div class="pure-u-1-1 small-font">
+        <p>This visualisation is created by <a href="https://github.com/yhua0189">Yunkai Huang</a>, adapted from an
+          example made by <a href="https://github.com/cywng">Cywng</a>. The dataset is
+          from the <a
+            href="https://www.kaggle.com/datasets/nazlbe/meteorological-and-snow-indicators-for-europe"
+            target="_blank">Kaggle website</href>.</p>
+      </div>
+      </div>
+    </div> <!-- end page -->
+
+  <script>
+    var specVis1 = "./data/choropleth.json";
+    var specVis2 = "./data/low.json";
+    var specVis3 = "./data/medium.json";
+    var specVis4 = "./data/high.json";
+    var specVis5 = "./data/mm_prod.json";
+    var specVis6 = "./data/temp_vs_natural_snow.json";
+
+
+    vegaEmbed('#vis1', specVis1).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+
+    vegaEmbed('#vis2', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis3', specVis3, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis4', specVis4, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis5', specVis5, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis6', specVis6, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
 </body>
+
 </html>

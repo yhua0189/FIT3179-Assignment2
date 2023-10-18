@@ -27,11 +27,13 @@
         "url": "https://raw.githubusercontent.com/yhua0189/FIT3179-Assignment2/main/FIT3179%20Assignment%202/data/weather_indicators_RCP45.csv"
       },
 
-      "mark": "circle",
+      "mark":{"type":"circle"} ,
       "encoding": {
-        "tooltip": {
-          "field": "ZS"
-        },
+        "tooltip": [
+          {"field": "ZS"},
+          {"field": "LAT", "type": "quantitative"},
+          {"field": "LON", "type": "quantitative"}],
+        
         "longitude": {
           "field": "LON",
           "type": "quantitative"
@@ -41,7 +43,13 @@
           "type": "quantitative"
         },
         "size": {"value": 10},
-        "color": {"value": "steelblue"}
+        "color": {
+          "field": "ZS",
+          "type": "quantitative",
+          "title": ["Altitude"],
+          "scale":{"range":["green","red"]}
+          
+          }
       }
     }
   ]
