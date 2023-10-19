@@ -1,0 +1,13 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "Google's stock price over time.",
+    "data": {"url": "https://raw.githubusercontent.com/yhua0189/FIT3179-Assignment2/main/FIT3179%20Assignment%202/data/weather_indicators_RCP45.csv"},
+  
+    "mark": "line",
+    "encoding": {
+      "x": {"field": "time", "type": "quantitative"},
+      "y": {"aggregate": "average","field": "sd_days_low", "type": "quantitative","scale": {"domain": [0, 150]}}
+      
+    }
+  }
+  

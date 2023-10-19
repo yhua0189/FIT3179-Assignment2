@@ -1,0 +1,130 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+    "width": 800,
+    "height": 500,
+    "title": "Days of natural snow VS Temperature during the year",
+    "data": {
+        "url": "https://raw.githubusercontent.com/yhua0189/FIT3179-Assignment2/main/FIT3179%20Assignment%202/data/weather_indicators_RCP45.csv"
+    },
+    "params": [
+        {
+            "name": "Year",
+            "value": 2005,
+            "bind": {
+                "input": "range",
+                "min": 2005,
+                "max": 2030,
+                "step": 1,
+                "name": "Select year: "
+            }
+        }
+    ],
+  
+    "transform": [
+        {
+            "filter": "datum.time==Year"},
+            {"calculate": "datum.mean_winter_tas - 273.15 ", "as": "Celsius"}
+            
+        
+    ],
+    "encoding": {
+        "y": {
+            "field": "swe_days_natural_high",
+            "type": "quantitative",
+            "title": "Number of days of Natural snow",
+            "scale": {
+                "domain": [
+                    0,
+                    366
+                ]
+            }
+        },
+        
+        "x": {
+          
+            "field": "Celsius",
+            "title": "Winter temperature in Celsius",
+            "type": "quantitative",
+            "scale": {
+                "domain": [
+                    -20,
+                    20
+                ]
+            }
+        }
+    },
+    "layer": [
+        {
+            "mark": "circle",
+            "encoding": {
+                "size": {
+                    "field": "Celsius",
+                    "type": "quantitative",
+                    "title": "Period with natural snow(days)",
+                    "scale": {
+                        "type": "threshold",
+                        "domain": [
+                            0,
+                            10,
+                            20,
+                            30,
+                            50,
+                            80,
+                            100
+                        ],
+                        "range": [
+                            10,30,50,80,100,120,160,200
+                        ]
+                    }
+                },
+                "color": 
+                    {
+                    "field": "Celsius",
+                    "type": "quantitative"},
+                    
+             
+                "tooltip": [
+                  {
+                  "field": "swe_days_natural_high",
+                  "type": "quantitative",
+                  "title": "Natural snow"},
+                    
+                    {
+                        "field": "Celsius",
+            "title": "Winter temperature",
+            "type": "quantitative"
+                    },
+                  
+                    {
+                        "field": "time",
+                        "title":"Year",
+                        "type": "quantitative"
+                    }
+                ]
+            }
+        }
+       
+    ],
+    "config": {
+        "view": {
+          "stroke": null
+        },
+        "axis": {
+          "labelFont": "Oxygen",
+          "titleFont": "Oxygen"
+        },
+        "legend": {
+          "labelFont": "Oxygen",
+          "titleFont": "Oxygen"
+        },
+        "header": {
+          "labelFont": "Oxygen",
+          "titleFont": "Oxygen"
+        },
+        "title": {
+          "font": "Oxygen",
+          "fontSize": 20,
+          "fontWeight": 600
+        }
+      }
+}

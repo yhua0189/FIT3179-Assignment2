@@ -1,0 +1,19 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 400,
+    "height": 500,
+
+    "description": "Annual amount of machine made snow produced (in kg m-2).",
+    "data": {"url": "https://raw.githubusercontent.com/yhua0189/FIT3179-Assignment2/main/FIT3179%20Assignment%202/data/weather_indicators_RCP45.csv"},
+    "mark": {
+      "type": "bar",
+      "point": true
+    },
+    "encoding": {
+      "x": {"timeUnit": "year", "field": "time"},
+      "y": {"aggregate":"mean", "field": "mm_prod", "type": "quantitative"},
+      "tooltip":{"value": ""}
+      
+    }
+  }
+  
